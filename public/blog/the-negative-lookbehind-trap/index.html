@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='A request was made in this Daniweb thread to split a string based on punctuations and whitespaces but with a twist. The splitting should make exceptions/allowances for special cases.
+For e.g. let&rsquo;s say we are splitting on . (the dot character). Our splitting should keep titles like Mrs. and Mr. intact. What does this mean? Let&rsquo;s have a look at it with an example (for those wondering, the code snippets are in Python programming language):'>
+
+<meta property='og:title' content='The Negative look-behind trap -- regex • Sanjay'>
+<meta property='og:description' content='A request was made in this Daniweb thread to split a string based on punctuations and whitespaces but with a twist. The splitting should make exceptions/allowances for special cases.
+For e.g. let&rsquo;s say we are splitting on . (the dot character). Our splitting should keep titles like Mrs. and Mr. intact. What does this mean? Let&rsquo;s have a look at it with an example (for those wondering, the code snippets are in Python programming language):'>
+<meta property='og:url' content='sanjayts.net/blog/the-negative-lookbehind-trap/'>
+<meta property='og:site_name' content='Oblivious Ramblings'>
+<meta property='og:type' content='article'><meta property='article:section' content='Blog'><meta property='article:tag' content='regex'><meta property='article:tag' content='python'><meta property='article:published_time' content='2017-09-02T12:00:00&#43;06:00'/><meta property='article:modified_time' content='2017-09-02T22:00:00&#43;06:00'/>
+
+<meta name="generator" content="Hugo 0.26" />
+
+  <title>The Negative look-behind trap -- regex • Sanjay</title>
+  <link rel='canonical' href='sanjayts.net/blog/the-negative-lookbehind-trap/'>
+  <link rel='icon' href='/sanjayts.net/favicon.ico'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu:400,400i,700&subset=latin'>
+<link rel='stylesheet' href='/sanjayts.net/css/main.67a788c9.css'>
+
+  <link rel='stylesheet' href='/sanjayts.net/css/custom.css'>
+
+
+
+</head>
+
+
+<body class='page'>
+  <div class='site'>
+    <header id='header' class='header-container'>
+      <div class='site-header'>
+        <nav id='navmenu' aria-label='Main Menu'>
+  <ul class='main-menu'>
+    
+    <li>
+      <a href='sanjayts.net/' 
+        
+      >Home</a>
+    </li>
+    
+    <li>
+      <a href='sanjayts.net/blog/' 
+        
+      >Blog</a>
+    </li>
+    
+    <li>
+      <a href='sanjayts.net/about/' 
+        
+      >About</a>
+    </li>
+    
+  </ul>
+</nav>
+
+        <div class='site-info'>
+          
+          <p class='site-title title'>Oblivious Ramblings</p>
+          
+          <p class='site-description'>Thoughts on Python, Scala, Big Data and Programming in general</p>
+        </div>
+      </div>
+    </header>
+
+
+<main class='main'>
+  <article lang='en' class='entry'>
+    <header class='entry-header'>
+  <div class='entry-info'>
+    <h1 class='entry-title title'>The Negative look-behind trap -- regex</h1>
+    
+  </div>
+  
+<div class='meta'>
+  <span class='posted-on'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+
+    <span class='screen-reader'>Posted on </span>
+    <time class='date' datetime='2017-09-02T12:00:00&#43;06:00'>Sat Sep 2 2017</time>
+  </span>
+  
+  <span class='byline'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+
+    <span class='screen-reader'> by </span>
+    Sanjay
+  </span>
+  
+  
+  <span class='reading-time'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/> 
+  
+</svg>
+
+    4 mins read
+  </span>
+  
+</div>
+
+
+</header>
+
+    <div class='entry-content'>
+  <hr />
+
+<p>A request was made in this <a href="http://www.daniweb.com/software-development/java/threads/331201/java-split-text-by-spaces-and-punctuation#post1798456">Daniweb thread</a> to split a string based on punctuations and whitespaces but with a twist. The splitting should make exceptions/allowances for special cases.</p>
+
+<p>For e.g. let&rsquo;s say we are splitting on <code>.</code> (the dot character). Our splitting should keep titles like <code>Mrs.</code> and <code>Mr.</code> intact. What does this mean? Let&rsquo;s have a look at it with an example (for those wondering, the code snippets are in Python programming language):</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># Regular splitting based on punctuation (we need the backslash before the dot</span>
+<span style="color: #75715e"># because we need to make the regex engine aware that we are looking for a literal</span>
+<span style="color: #75715e"># dot and not the regex metacharacter which matches anything.</span>
+<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">re</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">split(</span><span style="color: #e6db74">r&#39;\.&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;a.b.c.Mr.d.Mrs.i.p&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;a&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;b&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;c&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mr&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;d&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mrs&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;i&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;p&#39;</span><span style="color: #f8f8f2">]</span>
+
+<span style="color: #75715e"># Special splitting</span>
+<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">re</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">split(</span><span style="color: #e6db74">r&#39;WE_NEED_SOMETHING_HERE&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;a.b.c.Mr.d.Mrs.i.p&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;a&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;b&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;c&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mr.&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;d&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mrs.&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;i&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;p&#39;</span><span style="color: #f8f8f2">]</span>
+</pre></div>
+
+<p>As you can see from the example above, we do split the string based on the dot character but skip the splitting in case of titles like <code>Mr.</code> and <code>Mrs.</code>. How would we go about doing it with regular expressions? Well, <a href="http://www.regular-expressions.info/lookaround.html">lookaround assertions</a> to the rescue, or something like that. ;) The most obvious fix here would be to just add negative lookbehinds and be done with it, right?</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># Splitting based on lookbehind</span>
+<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">re</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">split(</span><span style="color: #e6db74">r&#39;(?&lt;!Mr)\.&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;a.b.c.Mr.d.Mrs.i.p&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;a&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;b&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;c&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mr.d&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mrs&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;i&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;p&#39;</span><span style="color: #f8f8f2">]</span>
+</pre></div>
+
+<p>Whoa, we are looking good here. For those who haven&rsquo;t noticed, we skipped the <code>.</code> following <code>Mr</code> and hence <code>Mr.</code> was included in the split result. If it makes any easier, compare this output with the output of example one, it should make things clear. So, one more lookbehind and we should be golden. Let&rsquo;s try that:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># Splitting based on lookbehind</span>
+<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">re</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">split(</span><span style="color: #e6db74">r&#39;(?&lt;!Mr)\.|(?&lt;!Mrs)\.&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;a.b.c.Mr.d.Mrs.i.p&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;a&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;b&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;c&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mr&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;d&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mrs&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;i&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;p&#39;</span><span style="color: #f8f8f2">]</span>
+</pre></div>
+
+<p>Huh, what happened? Here&rsquo;s what happened:</p>
+
+<ul>
+<li>You ask the regex engine to split based on the alternations. So our regex literally reads as &ldquo;try to split based on dot unless it is followed by the literal <code>Mr</code> <strong>OR</strong> try to split based on dot unless it is followed by <code>Mrs</code>&ldquo;</li>
+<li>The splitting of first three dots is as expected i.e. <code>a.b.c.REM</code> results in the parts as <code>a</code>, <code>b</code>, <code>c</code> and the <code>REMAINING STRING</code>. This is because the negative lookbehind fails for this section of the string and hence normal splitting based on dot occurs.</li>
+<li>Now comes the tricky part; the regex engine is now positioned on the dot after <code>Mr</code>. It does a negative lookbehind assertion and confirms that we should ignore the dot if it is preceded by <code>Mr</code>. <em>But</em> it doesn&rsquo;t end here. We have an alternation in our regex.</li>
+<li>Now that the first alternation fails, the regex engine moves on to test the next altenation, which is <code>(?&lt;!Mrs)\.</code>. This negative lookbehind assertion is not satisfied because we are right now at the dot character which is preceded by <code>Mr</code> but we are checking for <code>Mrs</code>. So basically, the second alternation test passes and the dot character is used for splitting the string.</li>
+<li>This is totally unexpected behaviour but a side-effect of chaining negative lookbehinds in an alternation. Think of it as an &ldquo;OR&rdquo; test used in programming languages. If <em>any one</em> of the condition is satisfied, the check succeeds which is counter-productive to our case here.</li>
+</ul>
+
+<p>So, what&rsquo;s the solution? The solution is to ensure that for baking an exception in your regex (i.e. split based on dot char only if it isn&rsquo;t preceded by <code>Mr</code> or <code>Mrs</code>) you club the similar negative lookbehinds instead of keeping them separate. A logical solution here would be:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">re</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">split(</span><span style="color: #e6db74">r&#39;(?&lt;!Mr|Mrs)\.&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;a.b.c.Mr.d.Mrs.i.p&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;a&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;b&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;c&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mr&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;d&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mrs&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;i&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;p&#39;</span><span style="color: #f8f8f2">]</span>
+</pre></div>
+
+<p>Alas, it doesn&rsquo;t work with Python. The error which greets you is: &ldquo;sre_constants.error: look-behind requires fixed-width pattern&rdquo;. What is this trying to say to us? It means that the pattern used in lookbehind needs to be fixed width. So basically no <code>+</code> or <code>*</code>. In our case, we have an alternation with one pattern having length as 2 and the other pattern having length as 3 which causes the failure. But fear not, because we have a simple workaround which can help us get the correct value. Note that we don&rsquo;t care what precedes <code>Mr</code> as long as it is followed by the dot char. We can tweak/modify the regex a bit to make it fixed length (i.e. length 3) by adding a dot metacharacter in the mix. Here is something which should work:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">re</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">split(</span><span style="color: #e6db74">r&#39;(?&lt;!.Mr|Mrs)\.&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;a.b.c.Mr.d.Mrs.i.p&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;a&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;b&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;c&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mr.d&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Mrs.i&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;p&#39;</span><span style="color: #f8f8f2">]</span>
+</pre></div>
+
+<p>For those who didn&rsquo;t notice, I added a <code>.</code> just before the <code>Mr</code> in the alternation. Here is hoping this piece of write-up might help you in case you are stuck with a similar problem! :)</p>
+
+</div>
+
+    
+<footer class='entry-footer'>
+  
+    
+      
+      <div class='categories'>
+  <span class='category-icon'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+
+  </span>
+  <span class='screen-reader'>Categories: </span><a class='category' href='/categories/programming'>Programming</a></div>
+
+    
+  
+    
+      
+      <div class='tags'>
+  <span class='tag-icon'>
+    <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+
+  </span>
+  <span class='screen-reader'>Tags: </span><a class='tag' href='/tags/regex'>Regex</a>, <a class='tag' href='/tags/python'>Python</a></div>
+
+    
+  
+</footer>
+
+
+  </article>
+
+  
+    
+
+  
+
+  
+    <div class='comments-container'>
+  
+</div>
+
+  
+</main>
+
+    <footer id='footer' class='footer-container'>
+      <div class='footer'>
+        <div class='social'>
+  <nav aria-label='Social Menu'>
+    <ul class='social-menu'><li>
+        <a href='https://codepen.io/sanjayts' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Codepen account in new tab</span>
+          <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+  <line x1="12" y1="22" x2="12" y2="15.5"/>
+  <polyline points="22 8.5 12 15.5 2 8.5"/>
+  <polyline points="2 15.5 12 8.5 22 15.5"/>
+  <line x1="12" y1="2" x2="12" y2="8.5"/>
+  
+</svg>
+
+        </a>
+      </li><li>
+        <a href='mailto:me%20[at]%20sanjayts%20[dot]%20net' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Email account in new tab</span>
+          <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+
+        </a>
+      </li><li>
+        <a href='https://github.com/sanjayts' target='_blank' rel='noopener'>
+          <span class='screen-reader'>Open Github account in new tab</span>
+          <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+
+        </a>
+      </li></ul>
+  </nav>
+</div>
+
+        <div class='copyright'>
+          <p>
+    
+  
+  &copy; 2017 Sanjay</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='/sanjayts.net/js/main.af838dd5.js'></script>
+  
+    <script src='/sanjayts.net/js/custom.js'></script>
+  
+
+</body>
+
+</html>
+
