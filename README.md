@@ -14,3 +14,8 @@ The commands we need to run to get the blog up and running:
     hugo
     cd public
     git add * && git commit -m "The msg"
+
+
+In case you want to pull the latest code for submodules:
+
+    git submodule update --recursive
