@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Oblivious Ramblings</title>
-    <link>sanjayts.net/tags/</link>
+    <link>http://sanjayts.net/tags/</link>
     <description>Recent content in Tags on Oblivious Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 02 Sep 2017 12:00:00 +0600</lastBuildDate>
     
-	<atom:link href="sanjayts.net/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://sanjayts.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Python</title>
-      <link>sanjayts.net/tags/python/</link>
+      <link>http://sanjayts.net/tags/python/</link>
       <pubDate>Sat, 02 Sep 2017 12:00:00 +0600</pubDate>
       
-      <guid>sanjayts.net/tags/python/</guid>
+      <guid>http://sanjayts.net/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Regex</title>
-      <link>sanjayts.net/tags/regex/</link>
+      <link>http://sanjayts.net/tags/regex/</link>
       <pubDate>Sat, 02 Sep 2017 12:00:00 +0600</pubDate>
       
-      <guid>sanjayts.net/tags/regex/</guid>
+      <guid>http://sanjayts.net/tags/regex/</guid>
       <description></description>
     </item>
     

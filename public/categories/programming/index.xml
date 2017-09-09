@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Programming on Oblivious Ramblings</title>
-    <link>sanjayts.net/categories/programming/</link>
+    <link>http://sanjayts.net/categories/programming/</link>
     <description>Recent content in Programming on Oblivious Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 02 Sep 2017 12:00:00 +0600</lastBuildDate>
     
-	<atom:link href="sanjayts.net/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://sanjayts.net/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The Negative look-behind trap -- regex</title>
-      <link>sanjayts.net/blog/the-negative-lookbehind-trap/</link>
+      <link>http://sanjayts.net/blog/the-negative-lookbehind-trap/</link>
       <pubDate>Sat, 02 Sep 2017 12:00:00 +0600</pubDate>
       
-      <guid>sanjayts.net/blog/the-negative-lookbehind-trap/</guid>
+      <guid>http://sanjayts.net/blog/the-negative-lookbehind-trap/</guid>
       <description>A request was made in this Daniweb thread to split a string based on punctuations and whitespaces but with a twist. The splitting should make exceptions/allowances for special cases.
 For e.g. let&amp;rsquo;s say we are splitting on . (the dot character). Our splitting should keep titles like Mrs. and Mr. intact. What does this mean? Let&amp;rsquo;s have a look at it with an example (for those wondering, the code snippets are in Python programming language):</description>
     </item>
