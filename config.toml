@@ -1,5 +1,5 @@
 # baseURL = "http://sanjayts.net"
-baseURL = "sanjayts.github.io"
+baseURL = "https://sanjayts.github.io"
 title = "Ramblings"
 copyright = ""
 enableRobotsTXT = true
@@ -45,7 +45,7 @@ paginate = 5
   url = "/categories/"
 
 [sitemap]
-  changefreq = "weekly"
+  changefreq = "daily"
   priority = 0.5
   filename = "sitemap.xml"
 
