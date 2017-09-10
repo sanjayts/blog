@@ -1,5 +1,5 @@
-# baseURL = "http://sanjayts.net"
-baseURL = "https://sanjayts.github.io"
+baseURL = "http://sanjayts.net"
+# baseURL = "https://sanjayts.github.io"
 title = "Ramblings"
 copyright = ""
 enableRobotsTXT = true
@@ -62,6 +62,12 @@ paginate = 5
   mathjax = true            # see https://www.mathjax.org/                              # 是否使用mathjax（数学公式）
   linkToMarkDown = false    # if you config contentCopyright and hugo output .md files. # 是否在链接到markdown原始文件（如果你配置了下面的许可协议并允许hugo生成markdown文件）
   contentCopyright = "<a rel=\"license\" href=\"https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License\" target=\"_blank\">Creative Commons Attribution-ShareAlike License</a>"
+
+  [params.social]
+    a-email = "me [at] sanjayts [dot] net"
+    b-stack-overflow = "https://stackoverflow.com/users/193906/sanjay-t-sharma"
+    c-twitter = "https://twitter.com/sanjay_ts"
+    g-github = "https://github.com/sanjayts"
 
 
 [author]
