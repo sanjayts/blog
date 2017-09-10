@@ -2,14 +2,14 @@
 baseURL = "sanjayts.github.io"
 title = "Ramblings"
 copyright = ""
+enableRobotsTXT = true
+enableEmoji = true
 
 theme = "hugo-theme-even"
 
 disqusShortname = ""
 googleAnalytics = ""
-Paginate = 5
-
-preserveTaxonomyNames = true
+paginate = 5
 
 # Enable pygments code fences
 PygmentsCodeFences = true
@@ -67,19 +67,13 @@ pygmentsUseClasses = false
   bootcdn = false           # In china.                                                 # 是否使用bootcdn(针对大陆推荐使用)
   mathjax = true            # see https://www.mathjax.org/                              # 是否使用mathjax（数学公式）
   linkToMarkDown = false    # if you config contentCopyright and hugo output .md files. # 是否在链接到markdown原始文件（如果你配置了下面的许可协议并允许hugo生成markdown文件）
+  contentCopyright = "<a rel=\"license\" href=\"https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License\" target=\"_blank\">Creative Commons Attribution-ShareAlike License</a>"
 
-[params.seo]
-  # Title Separator: - – — · • * ⋆ | ~ « » < >
-  titleSeparator = "•"
 
 [params.opengraph]
   [params.opengraph.facebook]
     admins = ""
     appid = ""
-
-[taxonomies]
-  category = "categories"
-  tag = "tags"
 
 [social]
   facebook = ""
@@ -91,9 +85,6 @@ pygmentsUseClasses = false
   codepen = "sanjayts"
   email = "me [at] sanjayts [dot] net"
   github = "sanjayts"
-
-[permalinks]
-  page = "/:slug/"
 
 # Language Configuration
 defaultContentLanguage = "en"
