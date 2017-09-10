@@ -3,54 +3,54 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://sanjayts.net/</loc>
+    <loc>sanjayts.github.io/</loc>
     <lastmod>2017-09-02T22:00:00+06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://sanjayts.net/blog/</loc>
+    <loc>sanjayts.github.io/blog/</loc>
     <lastmod>2017-09-02T22:00:00+06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://sanjayts.net/about/</loc>
+    <loc>sanjayts.github.io/about/</loc>
   </url>
   
   <url>
-    <loc>http://sanjayts.net/blog/the-negative-lookbehind-trap/</loc>
+    <loc>sanjayts.github.io/blog/the-negative-lookbehind-trap/</loc>
     <lastmod>2017-09-02T22:00:00+06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://sanjayts.net/categories/</loc>
+    <loc>sanjayts.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://sanjayts.net/page/</loc>
+    <loc>sanjayts.github.io/page/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://sanjayts.net/categories/programming/</loc>
-    <lastmod>2017-09-02T22:00:00+06:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://sanjayts.net/tags/python/</loc>
+    <loc>sanjayts.github.io/categories/programming/</loc>
     <lastmod>2017-09-02T22:00:00+06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://sanjayts.net/tags/regex/</loc>
+    <loc>sanjayts.github.io/tags/python/</loc>
     <lastmod>2017-09-02T22:00:00+06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://sanjayts.net/tags/</loc>
+    <loc>sanjayts.github.io/tags/regex/</loc>
+    <lastmod>2017-09-02T22:00:00+06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>sanjayts.github.io/tags/</loc>
     <lastmod>2017-09-02T22:00:00+06:00</lastmod>
     <priority>0</priority>
   </url>

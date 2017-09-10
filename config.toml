@@ -1,4 +1,5 @@
-baseURL = "http://sanjayts.net"
+# baseURL = "http://sanjayts.net"
+baseURL = "sanjayts.github.io"
 title = "Oblivious Ramblings"
 copyright = ""
 

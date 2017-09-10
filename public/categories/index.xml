@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Oblivious Ramblings</title>
-    <link>http://sanjayts.net/categories/</link>
+    <link>sanjayts.github.io/categories/</link>
     <description>Recent content in Categories on Oblivious Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     
-	<atom:link href="http://sanjayts.net/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="sanjayts.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Programming</title>
-      <link>http://sanjayts.net/categories/programming/</link>
+      <link>sanjayts.github.io/categories/programming/</link>
       <pubDate>Sat, 02 Sep 2017 12:00:00 +0600</pubDate>
       
-      <guid>http://sanjayts.net/categories/programming/</guid>
+      <guid>sanjayts.github.io/categories/programming/</guid>
       <description></description>
     </item>
     
