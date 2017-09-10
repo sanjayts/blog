@@ -1,4 +1,4 @@
-# blog
+# Welcome
 My blog source
 
 ### Git submodule commands
@@ -19,3 +19,12 @@ The commands we need to run to get the blog up and running:
 In case you want to pull the latest code for submodules:
 
     git submodule update --recursive
+
+
+### TODO
+
+1. Better title!
+2. Pull request for theme to fix robots.txt
+3. Remove floating content on the right
+4. Figure out how to remove `Sanjay: Sanjay` at the end of each blog post
+5. Pipe separator between top menu items
