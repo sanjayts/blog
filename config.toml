@@ -7,9 +7,9 @@ enableEmoji = true
 
 theme = "hugo-theme-even"
 
-disqusShortname = ""
+disqusShortname = "https-sanjayts-net"
 googleAnalytics = ""
-paginate = 5
+paginate = 6
 
 # Enable pygments code fences
 # PygmentsCodeFences = true
@@ -25,12 +25,6 @@ paginate = 5
   weight = 10
   identifier = "home"
   url = "/"
-
-[[menu.main]]
-  name = "Archives"
-  weight = 20
-  identifier = "archives"
-  url = "/post/"
 
 [[menu.main]]
   name = "Tags"
