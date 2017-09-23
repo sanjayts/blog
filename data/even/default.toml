@@ -16,9 +16,13 @@ categories = "Categories"
   reward = "Reward"
   seeMarkDown = "The Markdown version »"
 
+  [posts.header]
+    wordCount = "%d words"
+    readingTime = "%d minute read"
+
 [copyright]
-  author = "Sanjay"
-  link = "Link"
+  author = "Author"
+  #link = "Link"
   lastMod = "LastMod"
   markdown = "Markdown"
   license = "License"

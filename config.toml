@@ -20,11 +20,11 @@ paginate = 6
 # true use pygments-css or false will color code directly
 #pygmentsUseClasses = false
 
-[[menu.main]]             # config your menu              # 配置目录
-  name = "Home"
-  weight = 10
-  identifier = "home"
-  url = "/"
+# [[menu.main]]             # config your menu              # 配置目录
+#   name = "Home"
+#   weight = 10
+#   identifier = "home"
+#   url = "/"
 
 [[menu.main]]
   name = "Tags"
@@ -44,13 +44,14 @@ paginate = 6
   filename = "sitemap.xml"
 
 [params]
-  description = "Thoughts on Python, Scala, Big Data and Programming in general"
+  description = "Thoughts On Python, Scala, Big Data and Programming In General"
   copyrightOwner = "Sanjay"
   copyrightStartYear = "2017"
   favicon = "favicon.ico"
   archive-paginate = 5
+  moreMeta = true
 
-  toc = true                                                                            # 是否开启目录
+  toc = false                                                                            # 是否开启目录
   fancybox = true           # see https://github.com/fancyapps/fancybox                 # 是否启用fancybox（图片可点击）
   bootcdn = false           # In china.                                                 # 是否使用bootcdn(针对大陆推荐使用)
   mathjax = true            # see https://www.mathjax.org/                              # 是否使用mathjax（数学公式）

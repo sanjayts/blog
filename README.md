@@ -1,5 +1,6 @@
 # Welcome
-My blog source
+
+Welcome to the source code of my humble blog [sanjayts.net](https://sanjayts.net)!
 
 ### Git submodule commands
 
@@ -20,11 +21,13 @@ In case you want to pull the latest code for submodules:
 
     git submodule update --recursive
 
+Or if you want to do it for all the modules at once (assuming there are no local changes):
+
+    git submodule foreach git pull
+
 
 ### TODO
 
 1. Better title!
-2. Pull request for theme to fix robots.txt
-3. Remove floating content on the right
-4. Figure out how to remove `Sanjay: Sanjay` at the end of each blog post
-5. Pipe separator between top menu items
+2. Pipe separator between top menu items
+3. Configurable date format (maybe send PR?)
