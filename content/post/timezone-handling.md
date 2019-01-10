@@ -1,5 +1,5 @@
 +++
-date = "2017-09-22T12:00:00+06:00"
+date = "2017-09-21T12:00:00+06:00"
 title = "Date & Time Gotchas"
 categories = ["programming"]
 tags = ["scala", "java", "date and time"]
