@@ -1,14 +1,17 @@
 baseURL = "http://sanjayts.net"
+languageCode = "en"
+defaultContentLanguage = "en"
 # baseURL = "https://sanjayts.github.io"
 title = "Ramblings"
 copyright = ""
+
+preserveTaxonomyNames = true
 enableRobotsTXT = true
 enableEmoji = true
-
 theme = "hugo-theme-even"
 
 disqusShortname = "https-sanjayts-net"
-googleAnalytics = ""
+googleAnalytics = "UA-106861059-1"
 paginate = 6
 
 # Enable pygments code fences
@@ -44,12 +47,17 @@ paginate = 6
   filename = "sitemap.xml"
 
 [params]
+  archivePaginate = 5
+  version = "4.x"
+  debug = false
+  since = 2017
   description = "Thoughts On Python, Scala, Big Data and Programming In General"
   copyrightOwner = "Sanjay"
   copyrightStartYear = "2017"
   favicon = "favicon.ico"
   archive-paginate = 5
   moreMeta = true
+  #dateFormatToUse = "2 Jan 2006"
 
   toc = false                                                                            # 是否开启目录
   fancybox = true           # see https://github.com/fancyapps/fancybox                 # 是否启用fancybox（图片可点击）
