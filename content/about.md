@@ -1,9 +1,9 @@
 ---
 title: About
-description: Ramblings of an anime loving programmer
+description: Ramblings of a software engineer
 comments: false
 menu: main
 weight: 50
 ---
 
-Howdy folks, welcome to my blog! I'm a programmer, avid gamer and anime lover.
+Hello folks, welcome to my blog. I'm a software engineer, avid reader and yoga lover.

@@ -30,4 +30,3 @@ Or if you want to do it for all the modules at once (assuming there are no local
 
 1. Better title!
 2. Pipe separator between top menu items
-3. Configurable date format (maybe send PR?)
